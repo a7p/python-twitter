@@ -140,6 +140,7 @@ class Status(object):
                retweet_count=None,
                scopes=None,
                source=None,
+               entities=None,
                text=None,
                truncated=None,
                urls=None,
@@ -199,6 +200,7 @@ class Status(object):
     self.contributors = contributors
     self.created_at = created_at
     self.current_user_retweet = current_user_retweet
+    self.entities = entities,
     self.favorited = favorited
     self.favorite_count = favorite_count
     self.geo = geo
@@ -775,6 +777,8 @@ class Status(object):
         media = data['entities']['media']
       else:
         media = []
+
+    print data
     return Status(created_at=data.get('created_at', None),
                   favorited=data.get('favorited', None),
                   favorite_count=data.get('favorite_count', None),
@@ -793,6 +797,7 @@ class Status(object):
                   user_mentions=user_mentions,
                   hashtags=hashtags,
                   media=media,
+                  entities=data.get('entities', None),
                   geo=data.get('geo', None),
                   place=data.get('place', None),
                   coordinates=data.get('coordinates', None),
