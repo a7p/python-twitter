@@ -778,7 +778,6 @@ class Status(object):
       else:
         media = []
 
-    print data
     return Status(created_at=data.get('created_at', None),
                   favorited=data.get('favorited', None),
                   favorite_count=data.get('favorite_count', None),
@@ -5047,7 +5046,7 @@ class ParseTweet:
   # compile once on import
   regexp ={"RT": "^RT","MT":r"^MT","ALNUM":r"(@[a-zA-Z0-9_]+)",
            "HASHTAG":r"(#[\w\d]+)","URL":r"([http://]?[a-zA-Z\d\/]+[\.]+[a-zA-Z\d\/\.]+)"}
-  regexp = {key:re.compile(value) for key,value in regexp.items()}
+  regexp = dict((key,re.compile(value)) for key,value in regexp.items())
   def __init__(self,timeline_owner,tweet):
     ''' timeline_owner : twitter handle of user account. tweet - 140 chars from feed; object does all computation on construction
         properties: 
